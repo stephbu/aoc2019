@@ -5,6 +5,7 @@
 
 # User-specific stuff
 .idea/
+vendor/
 
 ### Go template
 # Binaries for programs and plugins
