@@ -6,3 +6,9 @@ https://adventofcode.com/2019
 |--------|--------------------------------------|
 | Day 1  | <a href="./day1/">Day 1 Code</a>     |
 | Day 2  | <a href="./day2/">Day 2 Code</a>     |
+
+## Getting Started
+I've broken out the project into packages of code and tests per day.  Clone the repo, then use ```deps ensure``` to pull appropriate 
+missing packages into scope.
+
+I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.
