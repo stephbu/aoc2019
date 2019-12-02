@@ -1,7 +1,7 @@
 package day2
 
 import (
-	"log"
+	"github.com/pkg/errors"
 )
 
 var opcodes map[int]OpCode
@@ -19,7 +19,7 @@ func init() {
 	opcodes[HALT] = halt
 }
 
-func RunProcessor(memory []int) Registers {
+func RunProcessor(memory []int) (Registers, error) {
 
 	registers := Registers{}
 
@@ -32,10 +32,11 @@ func RunProcessor(memory []int) Registers {
 		if ok {
 			instruction(memory, &registers)
 		} else {
-			log.Fatalf("unknown instruction %v, registers %v, memory %v", memory[registers.PC], registers, memory)
+			err := errors.Errorf("unknown instruction %v, registers %v, memory %v", memory[registers.PC], registers, memory)
+			return registers, err
 		}
 	}
-	return registers
+	return registers, nil
 }
 
 type OpCode func(memory []int, registers *Registers)
