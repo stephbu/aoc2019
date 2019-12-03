@@ -11,10 +11,10 @@ https://adventofcode.com/2019
 I've broken out the project into packages of code and tests per day.  Clone the repo, then use 
 
 ```
-**[~]$**        go get github.com/stephbu/aoc2019
-**[~]$**        cd $GOROOT/src/github.com/stephbu/aoc2019
-**[aoc2019]$**: dep ensure       ## pull down vendored packages
-**[aoc2019]$**: go test ./... -v ## Run all tests
+go get github.com/stephbu/aoc2019
+cd $GOROOT/src/github.com/stephbu/aoc2019
+dep ensure       
+go test ./... -v 
 ``` 
 
 I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.
