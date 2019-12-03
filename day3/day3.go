@@ -13,32 +13,32 @@ type Coord struct {
 	Y int
 }
 
-func getDistanceFromTraceIntersection(manhattan bool, traceA string, traceB string) (int, error) {
+func getDistanceFromSteps(manhattan bool, steps1 string, steps2 string) (int, error) {
 
 	start := Coord{X: 0, Y: 0}
 
-	path1, err := generatePathsFromString(traceA, start)
+	path1, err := generatePathFromSteps(steps1, start)
 	if err != nil {
 		return 0, err
 	}
 
-	path2, err := generatePathsFromString(traceB, start)
+	path2, err := generatePathFromSteps(steps2, start)
 	if err != nil {
 		return 0, err
 	}
 
-	return getComputeBestFromPaths(manhattan, path1, path2), nil
+	return computeBestDistanceFromPaths(manhattan, path1, path2), nil
 }
 
 func intAbs(value int) int {
 	return int(math.Abs(float64(value)))
 }
 
-func (coord *Coord) Distance(other Coord) int {
+func (coord *Coord) ManhattanDistance(other Coord) int {
 	return intAbs(other.X-coord.X) + intAbs(other.Y-coord.Y)
 }
 
-func getComputeBestFromPaths(manhattan bool, pathA []Coord, pathB []Coord) int {
+func computeBestDistanceFromPaths(manhattan bool, pathA []Coord, pathB []Coord) int {
 
 	min := 0
 	last := 0
@@ -49,10 +49,11 @@ func getComputeBestFromPaths(manhattan bool, pathA []Coord, pathB []Coord) int {
 			if (coordA.X == coordB.X) && (coordA.Y == coordB.Y) {
 
 				if manhattan {
-					last = getManhattanDistance(start, coordA)
+					last = start.ManhattanDistance(coordA)
 				} else {
 					last = stepA + stepB
 				}
+				log.Printf("intersection at %v, distance %v", coordA, last)
 
 				if min == 0 || last < min {
 					min = last
@@ -64,13 +65,7 @@ func getComputeBestFromPaths(manhattan bool, pathA []Coord, pathB []Coord) int {
 	return min
 }
 
-func getManhattanDistance(start Coord, coordA Coord) int {
-	distance := start.Distance(coordA)
-	log.Printf("intersection at %v, distance %v", coordA, distance)
-	return distance
-}
-
-func generatePathsFromString(input string, start Coord) ([]Coord, error) {
+func generatePathFromSteps(input string, start Coord) ([]Coord, error) {
 
 	steps := strings.Split(input, ",")
 
