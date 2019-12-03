@@ -8,7 +8,11 @@ https://adventofcode.com/2019
 | Day 2  | <a href="./day2/">Day 2 Code</a>     |
 
 ## Getting Started
-I've broken out the project into packages of code and tests per day.  Clone the repo, then use ```deps ensure``` to pull appropriate 
-missing packages into scope.
+I've broken out the project into packages of code and tests per day.  Clone the repo, then use 
+
+```
+dep ensure       ## pull down vendored packages
+go test ./... -v ## Run all tests
+``` 
 
 I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.

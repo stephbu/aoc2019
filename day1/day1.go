@@ -15,7 +15,7 @@ func Main() {
 type MassCalc func(int) int
 
 func calculateMass(getMass MassCalc) {
-	lines, err := util.ReadLines("day1/puzzleinput.txt")
+	lines, err := util.ReadLines("puzzleinput.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
