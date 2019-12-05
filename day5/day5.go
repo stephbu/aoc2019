@@ -1,7 +1,6 @@
 package day5
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -46,9 +45,20 @@ func StoreInput(in string) {
 	inputChannel <- in
 }
 
-func RunProcessor(memory []int) (Registers, error) {
+func DebugProcessor(memory []int) (*Registers, error) {
 
-	registers := Registers{}
+	registers := &Registers{}
+	registers.Debug = true
+	return registers, execute(registers, memory)
+}
+
+func RunProcessor(memory []int) (*Registers, error) {
+
+	registers := &Registers{}
+	return registers, execute(registers, memory)
+}
+
+func execute(registers *Registers, memory []int) error {
 
 	for registers.PC < len(memory) {
 		if memory[registers.PC] == HALT {
@@ -70,13 +80,13 @@ func RunProcessor(memory []int) (Registers, error) {
 		instruction, ok := opCodes[instructionOpCode]
 
 		if ok {
-			instruction(memory, &registers)
+			instruction(memory, registers)
 		} else {
 			err := errors.Errorf("unknown instruction %v, registers %v, memory %v", memory[registers.PC], registers, memory)
-			return registers, err
+			return err
 		}
 	}
-	return registers, nil
+	return nil
 }
 
 func divmod(numerator, denominator int) (quotient, remainder int) {
@@ -91,6 +101,7 @@ type ParameterMask []int
 
 type Registers struct {
 	PC            int
+	Debug         bool
 	ParameterMask []int
 }
 
@@ -113,10 +124,19 @@ func getValue(memory []int, registers *Registers, offset int) int {
 	return v1
 }
 
+func debug(registers *Registers, format string, values ...interface{}) {
+	if registers.Debug {
+		format = format + "\r\n"
+		log.Printf(format, values...)
+	}
+}
+
 func add(memory []int, registers *Registers) {
 	v1 := getValue(memory, registers, 1)
 	v2 := getValue(memory, registers, 2)
 	memory[memory[registers.PC+3]] = v1 + v2
+	debug(registers, "ADD(%v,%v) -> [%v]=%v", v1, v2, memory[registers.PC+3], v1+v2)
+
 	registers.PC += 4
 }
 
@@ -124,6 +144,7 @@ func multiply(memory []int, registers *Registers) {
 	v1 := getValue(memory, registers, 1)
 	v2 := getValue(memory, registers, 2)
 	memory[memory[registers.PC+3]] = v1 * v2
+	debug(registers, "MULT(%v,%v) -> [%v]=%v", v1, v2, memory[registers.PC+3], v1*v2)
 	registers.PC += 4
 }
 
@@ -135,12 +156,13 @@ func input(memory []int, registers *Registers) {
 	}
 
 	memory[memory[registers.PC+1]] = v1
+	debug(registers, "INPUT(%v) -> [%v]=%v", memory[registers.PC+1], memory[registers.PC+1], v1)
 	registers.PC += 2
 }
 
 func output(memory []int, registers *Registers) {
 	v1 := getValue(memory, registers, 1)
-	fmt.Printf("output-> %v\r\n", v1)
+	debug(registers, "OUTPUT(%v) -> [%v]=%v", memory[registers.PC+1], memory[registers.PC+1], v1)
 	outputChannel <- v1
 	registers.PC += 2
 }
@@ -151,8 +173,10 @@ func jift(memory []int, registers *Registers) {
 
 	if v1 != 0 {
 		registers.PC = v2
+		debug(registers, "JIFT(%v,%v) -> PC=%v", v1, v2, v1)
 	} else {
 		registers.PC += 3
+		debug(registers, "JIFT(%v,%v) -> NOP", v1, v2)
 	}
 }
 
@@ -162,8 +186,10 @@ func jiff(memory []int, registers *Registers) {
 
 	if v1 == 0 {
 		registers.PC = v2
+		debug(registers, "JIFF(%v,%v) -> PC=%v", v1, v2, v1)
 	} else {
 		registers.PC += 3
+		debug(registers, "JIFT(%v,%v) -> NOP", v1, v2)
 	}
 }
 
