@@ -55,8 +55,8 @@ func expandOrbits(orbitExpressions []string) (direct []*Orbit, indirect []*Orbit
 
 func findShortestPath(orbits []*Orbit, body1 string, body2 string) (int, string) {
 
-	path1 := []*Orbit{}
-	path2 := []*Orbit{}
+	var path1 []*Orbit
+	var path2 []*Orbit
 
 	for _, orbit := range orbits {
 		if orbit.Body == body1 {

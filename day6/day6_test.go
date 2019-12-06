@@ -73,6 +73,34 @@ func TestPart2Sample2a(t *testing.T) {
 
 }
 
+func TestPart2Sample2b(t *testing.T) {
+	lines, err := util.ReadLines("inputpart2sample1.txt")
+	if err != nil {
+		log.Fatalf("error reading file :%v", err)
+	}
+	d, i := expandOrbits(lines)
+	orbits := append(d, i...)
+
+	shortestPath, commonCOM := findShortestPath(orbits, "YOU", "E")
+	assert.Equal(t, 2, shortestPath)
+	assert.Equal(t, "E", commonCOM)
+
+}
+
+func TestPart2Sample2c(t *testing.T) {
+	lines, err := util.ReadLines("inputpart2sample1.txt")
+	if err != nil {
+		log.Fatalf("error reading file :%v", err)
+	}
+	d, i := expandOrbits(lines)
+	orbits := append(d, i...)
+
+	shortestPath, commonCOM := findShortestPath(orbits, "E", "YOU")
+	assert.Equal(t, 2, shortestPath)
+	assert.Equal(t, "E", commonCOM)
+
+}
+
 func TestPart2Puzzle(t *testing.T) {
 	lines, err := util.ReadLines("inputpuzzle.txt")
 	if err != nil {
