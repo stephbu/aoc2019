@@ -83,13 +83,13 @@ func (los *LOSResult) String() string {
 }
 
 // mapchar blank matches all objects
-func (asteroids *StarMap) CalculateLOS(coord Coord, match func(body Body) bool) map[float64][]LOSResult {
+func (asteroids *StarMap) CalculateLOS(self Coord, match func(body Body) bool) map[float64][]LOSResult {
 
 	results := make(map[float64][]LOSResult, 0)
 
 	for coords, body := range asteroids.Index {
 
-		if coords == coord {
+		if coords == self {
 			continue
 		}
 
@@ -97,9 +97,13 @@ func (asteroids *StarMap) CalculateLOS(coord Coord, match func(body Body) bool) 
 			continue
 		}
 
-		delta := coord.Subtract(coords)
+		delta := coords.Subtract(self)
 
-		rad := math.Atan2(float64(delta.Y), float64(delta.X)) // In radians
+		rad := math.Atan2(float64(coords.X-self.X), float64(self.Y-coords.Y)) // In radians
+
+		if rad < 0 {
+			rad = rad + (math.Pi * 2)
+		}
 		deg := rad * (180 / math.Pi)
 
 		distance := math.Sqrt(math.Pow(float64(delta.X), 2) + math.Pow(float64(delta.Y), 2))
@@ -121,13 +125,13 @@ func UnrollLOS(los map[float64][]LOSResult) []Body {
 
 	type Path struct {
 		Angle float64
-		LOS []LOSResult
+		LOS   []LOSResult
 	}
 
-	paths := make([]Path,0)
+	paths := make([]Path, 0)
 
-	for key,bodies := range los {
-		paths = append(paths, Path{Angle:key, LOS:bodies})
+	for key, bodies := range los {
+		paths = append(paths, Path{Angle: key, LOS: bodies})
 	}
 
 	sort.Slice(paths, func(i, j int) bool {
@@ -139,14 +143,14 @@ func UnrollLOS(los map[float64][]LOSResult) []Body {
 	repeat := true
 	for repeat {
 		repeat = false
-		for _, path := range paths {
-			if len(path.LOS) == 0 {
+		for index, _ := range paths {
+			if len(paths[index].LOS) == 0 {
 				continue
 			}
-			output = append(output, path.LOS[0].Body)
-			path.LOS = path.LOS[1:]
+			output = append(output, paths[index].LOS[0].Body)
+			paths[index].LOS = paths[index].LOS[1:]
 
-			if len(path.LOS) > 0 {
+			if len(paths[index].LOS) > 0 {
 				repeat = true
 			}
 		}

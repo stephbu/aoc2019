@@ -158,10 +158,48 @@ func TestPart1Puzzle(t *testing.T) {
 func TestPart2Sample6(t *testing.T) {
 
 	asteroidMap := LoadMapFromFile("sample6.txt")
-	losMap := asteroidMap.CalculateLOS(Coord{8,3}, AsteroidHash)
+	losMap := asteroidMap.CalculateLOS(Coord{8, 3}, AsteroidHash)
 	output := UnrollLOS(losMap)
 	t.Logf("%v", output)
 
+}
+
+func TestPart2Sample7(t *testing.T) {
+
+	asteroidMap := LoadMapFromFile("sample7.txt")
+	losMap := asteroidMap.CalculateLOS(Coord{11, 13}, AsteroidHash)
+	output := UnrollLOS(losMap)
+
+	assert.Equal(t, Coord{11, 12}, output[0].Coord)
+	assert.Equal(t, Coord{12, 1}, output[1].Coord)
+	assert.Equal(t, Coord{12, 2}, output[2].Coord)
+	assert.Equal(t, Coord{12, 8}, output[9].Coord)
+	assert.Equal(t, Coord{16, 0}, output[19].Coord)
+	assert.Equal(t, Coord{16, 9}, output[49].Coord)
+	assert.Equal(t, Coord{10, 16}, output[99].Coord)
+	assert.Equal(t, Coord{9, 6}, output[198].Coord)
+	assert.Equal(t, Coord{8, 2}, output[199].Coord)
+	assert.Equal(t, Coord{10, 9}, output[200].Coord)
+	assert.Equal(t, Coord{11, 1}, output[298].Coord)
+
+	index := 1
+	for _, body := range output {
+		t.Logf("Index:%d Coord:%v", index, body.Coord)
+		index++
+	}
+}
+
+func TestPart2Puzzle(t *testing.T) {
+
+	asteroidMap := LoadMapFromFile("inputpuzzle.txt")
+	losMap := asteroidMap.CalculateLOS(Coord{25, 31}, AsteroidHash)
+	output := UnrollLOS(losMap)
+
+	index := 1
+	for _, body := range output {
+		t.Logf("Index:%d Coord:%v Compute:%d", index, body.Coord, body.Coord.X*100+body.Coord.Y)
+		index++
+	}
 }
 
 func AsteroidHash(body Body) bool {

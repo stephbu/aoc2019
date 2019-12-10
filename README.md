@@ -12,7 +12,8 @@ https://adventofcode.com/2019
 |6|<a href="./day6/">day6</a>|<a href="https://adventofcode.com/2019/day/6">day6</a>|Stalled for a while because I missed the test data/samples being ordered, but unordered in the puzzle. This caused problems in missing large chunks of data during the expansion of direct orbits into indirect orbits, and undercounting the dataset (~7300 vs ~203000).  Rectified the mistake by taking two passes at the data, one to load the direct orbits, and second to recursively scan and expand each indirect orbit.  Part two just needed to retro-fit hop-counting in the indirect expansion phase, to enable fast finding of common-root brute-force list comparison to extract least hops|
 |7|<a href="./day7/">day7</a>|<a href="https://adventofcode.com/2019/day/7">day7</a>|Third day of Intcode CPU, after starting Part 1 a little late, I made good progress and took less than 30mins to get to answer.  Part 2 not so good, managed to miss the fact that I was using a ref-copy of memory, so go-routines were corrupting each other.  Figured it out in the end.|
 |8|<a href="./day8/">day8</a>|<a href="https://adventofcode.com/2019/day/8">day8</a>|Simpler day, easier problem, less satisfying outcome with weaker tests because of the shape fo the results require visual interpretation. I used GSheets conditional formatting to make Part 2 answer really clear.|
-|9|<a href="./day9/">day9</a>|<a href="https://adventofcode.com/2019/day/9">day9</a>||
+|9|<a href="./day9/">day9</a>|<a href="https://adventofcode.com/2019/day/9">day9</a>|More use of the IntCode Processor, adding modes for parameters working ok|
+|10|<a href="./day9/">day10</a>|<a href="https://adventofcode.com/2019/day/10">day10</a>|Lots of geometry - rusty as heck.|
 ## Getting Started
 I've broken out the project into packages of code and tests per day.  Clone the repo, then use 
 
