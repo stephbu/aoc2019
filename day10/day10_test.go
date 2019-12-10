@@ -155,6 +155,15 @@ func TestPart1Puzzle(t *testing.T) {
 
 }
 
+func TestPart2Sample6(t *testing.T) {
+
+	asteroidMap := LoadMapFromFile("sample6.txt")
+	losMap := asteroidMap.CalculateLOS(Coord{8,3}, AsteroidHash)
+	output := UnrollLOS(losMap)
+	t.Logf("%v", output)
+
+}
+
 func AsteroidHash(body Body) bool {
 	if body.MapChar == "#" {
 		return true

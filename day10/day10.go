@@ -57,9 +57,9 @@ func LoadMapFromFile(filename string) StarMap {
 	x := len(lines[0])
 	y := len(lines)
 
-	result.Map = make([][]Body, y)
+	result.Map = make([][]Body, x)
 	for i := range result.Map {
-		result.Map[i] = make([]Body, x)
+		result.Map[i] = make([]Body, y)
 	}
 
 	for indexY, line := range lines {
@@ -115,4 +115,42 @@ func (asteroids *StarMap) CalculateLOS(coord Coord, match func(body Body) bool) 
 	}
 
 	return results
+}
+
+func UnrollLOS(los map[float64][]LOSResult) []Body {
+
+	type Path struct {
+		Angle float64
+		LOS []LOSResult
+	}
+
+	paths := make([]Path,0)
+
+	for key,bodies := range los {
+		paths = append(paths, Path{Angle:key, LOS:bodies})
+	}
+
+	sort.Slice(paths, func(i, j int) bool {
+		return paths[i].Angle < paths[j].Angle
+	})
+
+	var output []Body
+
+	repeat := true
+	for repeat {
+		repeat = false
+		for _, path := range paths {
+			if len(path.LOS) == 0 {
+				continue
+			}
+			output = append(output, path.LOS[0].Body)
+			path.LOS = path.LOS[1:]
+
+			if len(path.LOS) > 0 {
+				repeat = true
+			}
+		}
+	}
+
+	return output
 }
