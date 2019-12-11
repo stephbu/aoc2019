@@ -2,6 +2,8 @@
 I'll try to squeeze in code every day
 https://adventofcode.com/2019
 
+LMK if you're enjoying pawing over my code : <a href="mailto:stephbu@gmail.com">mailto:stephbu@gmail.com</a>
+
 |Day|Source Package|Puzzle Rubric|Notes|
 |---|---|---|---|
 |1|<a href="./day1/">day1</a>|<a href="https://adventofcode.com/2019/day/1">day1</a>|Good warmup exercise|
@@ -13,7 +15,8 @@ https://adventofcode.com/2019
 |7|<a href="./day7/">day7</a>|<a href="https://adventofcode.com/2019/day/7">day7</a>|Third day of Intcode CPU, after starting Part 1 a little late, I made good progress and took less than 30mins to get to answer.  Part 2 not so good, managed to miss the fact that I was using a ref-copy of memory, so go-routines were corrupting each other.  Figured it out in the end.|
 |8|<a href="./day8/">day8</a>|<a href="https://adventofcode.com/2019/day/8">day8</a>|Simpler day, easier problem, less satisfying outcome with weaker tests because of the shape fo the results require visual interpretation. I used GSheets conditional formatting to make Part 2 answer really clear.|
 |9|<a href="./day9/">day9</a>|<a href="https://adventofcode.com/2019/day/9">day9</a>|More use of the IntCode Processor, adding modes for parameters working ok|
-|10|<a href="./day9/">day10</a>|<a href="https://adventofcode.com/2019/day/10">day10</a>|Lots of geometry - rusty as heck.|
+|10|<a href="./day10/">day10</a>|<a href="https://adventofcode.com/2019/day/10">day10</a>|Lots of geometry - rusty as heck.  Missed the occlusion at any angle clause, ended up writing a masking system that I canned when I RTFM.  The Hashmap/SortedList worked really well in the second part.  Most of the code was mainly assertives test cases.  Almost went to bed to sleep on Part 2, transforming the X-oriented geometry to bearings. Had a brainwave literally just before shutdown, and got 'er done.|
+|11|<a href="./day11/">day11</a>|<a href="https://adventofcode.com/2019/day/11">day11</a>|Multidimensional Arrays suck lots in Golang - untuitive syntax, initialization, consumption, the works. Got there in the end.|
 ## Getting Started
 I've broken out the project into packages of code and tests per day.  Clone the repo, then use 
 
@@ -27,3 +30,8 @@ go test ./day6 -v  # test specific day
 ``` 
 
 I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.
+
+## DevLog Day 11
+So I made it to the brink of day 11. On track at 20 stars and just waiting for the clock to to get another couple.  Made a tonne of use of the IntCode interpreter.  I think all those days of Z80 are starting to pay off 42 years later.  I'm sitting at 5.3KLoC, not bad for 10 nights of hacking away.
+Not sure if I'll get time code Thur/Fri, I'm day-tripping SFO in a couple of days time, then company Xmas party the day after.
+Pretty tired after late nights     
