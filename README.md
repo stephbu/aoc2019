@@ -2,7 +2,7 @@
 I'll try to squeeze in code every day
 https://adventofcode.com/2019
 
-LMK if you're enjoying pawing over my code : <a href="mailto:stephbu@gmail.com">stephbu@gmail.com</a>
+Because each "day" is published 9pm PST, that puts a bit of crush on quality vs. sleep and a day-job. I'm primarily focused on "getting 'er done" with crude beauty :). LMK if you're enjoying or loathing pawing over my code and approach: <a href="mailto:stephbu@gmail.com">stephbu@gmail.com</a>
 
 |Day|Source Package|Puzzle Rubric|Notes|
 |---|---|---|---|
