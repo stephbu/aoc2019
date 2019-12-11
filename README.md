@@ -2,7 +2,7 @@
 I'll try to squeeze in code every day
 https://adventofcode.com/2019
 
-LMK if you're enjoying pawing over my code : <a href="mailto:stephbu@gmail.com">mailto:stephbu@gmail.com</a>
+LMK if you're enjoying pawing over my code : <a href="mailto:stephbu@gmail.com">stephbu@gmail.com</a>
 
 |Day|Source Package|Puzzle Rubric|Notes|
 |---|---|---|---|
