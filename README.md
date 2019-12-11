@@ -2,7 +2,9 @@
 I'll try to squeeze in code every day
 https://adventofcode.com/2019
 
-Because each "day" is published 9pm PST, that puts a bit of crush on quality vs. sleep and a day-job. I'm primarily focused on "getting 'er done" with crude beauty :). LMK if you're enjoying or loathing pawing over my code and approach: <a href="mailto:stephbu@gmail.com">stephbu@gmail.com</a>
+Because each "day" is published at 9pm PST, there's a crush on quality vs. sleep and a day-job. I'm primarily focused deepening my Go skills while "getting 'er done" with crude beauty :).  I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.
+
+LMK if you're enjoying or loathing pawing over my code and approach: <a href="mailto:stephbu@gmail.com">stephbu@gmail.com</a>
 
 |Day|Source Package|Puzzle Rubric|Notes|
 |---|---|---|---|
