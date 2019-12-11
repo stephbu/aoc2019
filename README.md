@@ -33,6 +33,9 @@ go test ./day6 -v  # test specific day
 
 I've taken writing unit-tests to assert samples initially, then separate tests per "part" of each challenge.
 
+## DevLog Day 7
+Really tired after a super late night and early start at work. Part 1 done reasonably quickly. Part 2, made a wrong turn that wasted ~3hrs on a go-routine-on-go-routine corruption because I forgot to copy IntCode program memory.
+
 ## DevLog Day 11
 So I made it to the brink of day 11. On track at 20 stars and just waiting for the clock to to get another couple.  Made a tonne of use of the IntCode interpreter.  I think all those days of Z80 are starting to pay off 42 years later.  I'm sitting at 5.3KLoC, not bad for 10 nights of hacking away.
 Not sure if I'll get time code Thur/Fri, I'm day-tripping SFO in a couple of days time, then company Xmas party the day after.
